@@ -1,0 +1,21 @@
+{
+    "name": "zhengqi/common-utils",
+    "description": "提供字符串处理、数组处理工具",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Zhengqi\\CommonUtils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zhengqi",
+            "email": "zhengqi.ultra@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "version": "0.0.1"
+}
