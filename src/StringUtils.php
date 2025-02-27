@@ -5,7 +5,7 @@ namespace Zhengqi\CommonUtils;
 /**
  * 字符串处理工具类
  */
-class StringUtils
+class StringUtils extends AbstractUtils
 {
     /**
      * 判断值是否为 null

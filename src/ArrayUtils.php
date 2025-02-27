@@ -5,7 +5,7 @@ namespace Zhengqi\CommonUtils;
 /**
  * 数组处理工具类
  */
-class ArrayUtils
+class ArrayUtils extends AbstractUtils
 {
 
     /**
