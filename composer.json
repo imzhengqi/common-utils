@@ -1,6 +1,6 @@
 {
     "name": "zhengqi/common-utils",
-    "description": "提供字符串处理、数组处理工具",
+    "description": "提供字符串处理、数组处理、日期处理、随机字符串、IP地址 工具",
     "type": "library",
     "license": "MIT",
     "autoload": {
