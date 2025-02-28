@@ -1,10 +1,10 @@
 <?php
-namespace Zhengqi\CommonUtils;
+namespace zhengqi\common\utils;
 
 /**
  * 日期时间处理工具类
  */
-class DateTimeUtils extends BaseUtils
+class DateTimeUtils extends AbstractUtils
 {
 
 }
