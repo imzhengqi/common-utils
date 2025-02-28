@@ -1,5 +1,5 @@
 <?php
-namespace Zhengqi\CommonUtils;
+namespace zhengqi\common\utils;
 
 abstract class AbstractUtils
 {
