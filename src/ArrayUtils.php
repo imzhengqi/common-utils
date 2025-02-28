@@ -1,6 +1,6 @@
 <?php
 
-namespace Zhengqi\CommonUtils;
+namespace zhengqi\common\utils;
 
 /**
  * 数组处理工具类
