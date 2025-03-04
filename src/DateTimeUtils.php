@@ -17,8 +17,7 @@ class DateTimeUtils extends AbstractUtils
      */
     public static function nowTimeMillis(): int
     {
-        $nanoseconds = hrtime(true); // 获取纳秒级时间戳
-        return (int)($nanoseconds / 1e6); // 转换为毫秒
+        return (int)(microtime(true) * 1000);
     }
 
     /**
