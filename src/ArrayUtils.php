@@ -19,37 +19,27 @@ class ArrayUtils extends AbstractUtils
      */
     public static function buildTree(
         array  $array,
+        int $parentId = 0,
         string $idKey = 'id',
         string $parentKey = 'parent_id',
         string $childrenKey = 'children'
     ): array
     {
-        $tree = [];
-        $map = [];
-
-        // 将所有节点存储到映射表中
+        $branch = [];
         foreach ($array as $item) {
-            $map[$item[$idKey]] = $item;
-            $map[$item[$idKey]][$childrenKey] = []; // 初始化子节点
-        }
-
-        // 构建树形结构
-        foreach ($map as $id => &$node) {
-            if (isset($node[$parentKey])) {
-                $parentId = $node[$parentKey];
-                if (isset($map[$parentId])) {
-                    $map[$parentId][$childrenKey][] = &$node;
+            if ($item[$parentKey] == $parentId) {
+                $children = self::buildTree($array, $item[$idKey]);
+                if ($children) {
+                    $item[$childrenKey] = $children;
                 }
-            } else {
-                $tree[] = &$node; // 根节点
+                $branch[] = $item;
             }
         }
-
-        return $tree;
+        return $branch;
     }
 
     /**
-     * 将树形结构转换为扁平数组
+     * 将树形结构转换为扁平数组 - 栈
      *
      * @param array $tree 树形结构
      * @param string $childrenKey 子节点字段名（默认 'children'）
@@ -73,6 +63,41 @@ class ArrayUtils extends AbstractUtils
         }
 
         return $result;
+    }
+
+    /**
+     * 将树形结构转换为扁平数组 - 递归
+     *
+     * @param array $tree
+     * @param string $childrenKey
+     * @return array
+     */
+    public static function flattenTree2(array $tree, string $childrenKey = 'children'): array
+    {
+        $flatArray = [];
+
+        // 定义递归函数
+        function traverse($nodes, &$flatArray, $childrenKey)
+        {
+            foreach ($nodes as $node) {
+                // 移除 'children' 键，只保留需要的数据
+                $flatNode = $node;
+                unset($flatNode[$childrenKey]);
+
+                // 将当前节点添加到扁平数组
+                $flatArray[] = $flatNode;
+
+                // 如果有子节点，递归处理
+                if (isset($node[$childrenKey]) && is_array($node[$childrenKey])) {
+                    traverse($node[$childrenKey], $flatArray, $childrenKey);
+                }
+            }
+        }
+
+        // 调用递归函数
+        traverse($tree, $flatArray, $childrenKey);
+
+        return $flatArray;
     }
 
 }

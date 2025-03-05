@@ -19,5 +19,8 @@
         "ext-mbstring": "*"
     },
     "prefer-stable": true,
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^11.2"
+    }
 }

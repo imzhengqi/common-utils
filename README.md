@@ -1,11 +1,6 @@
 php-common-utils
 ===============
-PHP常用工具类
-
-## 远程仓库
-[github] https://github.com/imzhengqi/common-utils.git
-
-[gitee]  https://gitee.com/imzhengqi/common-utils.git
+PHP常用工具类封装
 
 
 ## 安装
@@ -14,8 +9,8 @@ PHP常用工具类
 composer require zhengqi/common-utils
 ~~~
 
-## 使用
+## 使用与扩展
 
 ~~~
-建议继承使用
+建议继承使用，方便扩展
 ~~~
