@@ -93,7 +93,7 @@ class StringUtils extends AbstractUtils
      */
     public static function isHttps(string $string): bool
     {
-        return self::isStartWith($string, 'http') || self::isStartWith($string, 'https');
+        return self::isStartWith($string, 'https');
     }
 
     /**
@@ -154,9 +154,21 @@ class StringUtils extends AbstractUtils
      */
     public static function toSnake(string $string, string $separator = '_'): string
     {
-        return strtolower(
-            preg_replace('/(?<!^)[A-Z]/', $separator . '$0', $string)
-        );
+        // 在大写字母前添加下划线（除了第一个字符）
+        $string = preg_replace('/(?<!^)[A-Z]/', $separator . '$0', $string);
+
+        // 在数字前后添加下划线
+        $string = preg_replace('/(\d+)/', $separator. '$1' . $separator, $string);
+
+        // 将字符串全部转换为小写
+        $string = strtolower($string);
+
+        // 去掉字符串末尾的下划线（如果不是原始下划线结尾）
+        if (!self::isEndWith($string, $separator)) {
+            $string = rtrim($string, $separator);
+        }
+
+        return $string;
     }
 
     /**
@@ -167,20 +179,20 @@ class StringUtils extends AbstractUtils
      */
     public static function toArray(string $string, string $separator = '_'): array
     {
-        return explode($string, $separator);
+        return explode($separator, $string);
     }
 
     /**
      * 分割字符串
      * @param string $string
      * @param int $start
-     * @param int $end
+     * @param int $length
      * @param string $encoding
      * @return string
      */
-    public static function mbSubstr(string $string, int $start, int $end, string $encoding = 'UTF-8'): string
+    public static function mbSubstr(string $string, int $start, int $length, string $encoding = 'UTF-8'): string
     {
-        return mb_substr($string, $start, $end, $encoding);
+        return mb_substr($string, $start, $length, $encoding);
     }
 
 

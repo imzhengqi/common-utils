@@ -310,7 +310,7 @@ class DateTimeUtils extends AbstractUtils
     {
         $date = new DateTime($datetime);
         // 设置当前日期所在年的开始时间（第一天）
-        $date->modify('first day of this year')->setTime(0, 0, 0);
+        $date->modify('first day of January this year')->setTime(0, 0, 0);
 
         // 格式化输出
         return $date->format($format);
@@ -327,7 +327,7 @@ class DateTimeUtils extends AbstractUtils
     {
         $date = new DateTime($datetime);
         // 设置当前日期所在年的结束时间（最后一天）
-        $date->modify('last day of this year')->setTime(23, 59, 59);
+        $date->modify('last day of December this year')->setTime(23, 59, 59);
 
         // 格式化输出
         return $date->format($format);
@@ -345,11 +345,11 @@ class DateTimeUtils extends AbstractUtils
 
         // 设置当前日期所在年的开始时间（第一天）
         $startOfYear = clone $date;
-        $startOfYear->modify('first day of this year')->setTime(0, 0, 0);
+        $startOfYear->modify('first day of January this year')->setTime(0, 0, 0);
 
         // 设置当前日期所在年的结束时间（最后一天）
         $endOfYear = clone $date;
-        $endOfYear->modify('last day of this year')->setTime(23, 59, 59);
+        $endOfYear->modify('last day of December this year')->setTime(23, 59, 59);
 
         // 格式化输出
         return [
