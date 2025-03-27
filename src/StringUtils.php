@@ -57,7 +57,7 @@ class StringUtils extends AbstractUtils
      */
     public static function isStartWith(string $string, string $needle): bool
     {
-        return strpos($string, $needle) === 0;
+        return str_starts_with($string, $needle);
     }
 
     /**
@@ -68,12 +68,7 @@ class StringUtils extends AbstractUtils
      */
     public static function isEndWith(string $string, string $needle): bool
     {
-        $needleLength = strlen($needle);
-        // 空后缀默认 不匹配
-        if ($needleLength === 0) {
-            return false;
-        }
-        return substr($string, -$needleLength) === $needle;
+        return str_ends_with($string, $needle);
     }
 
     /**
@@ -189,10 +184,15 @@ class StringUtils extends AbstractUtils
      * @param int $length
      * @param string $encoding
      * @return string
+     * @throws \InvalidArgumentException
      */
     public static function mbSubstr(string $string, int $start, int $length, string $encoding = 'UTF-8'): string
     {
-        return mb_substr($string, $start, $length, $encoding);
+        $result = mb_substr($string, $start, $length, $encoding);
+        if ($result === false) {
+            throw new \InvalidArgumentException('Invalid parameters for mb_substr');
+        }
+        return $result;
     }
 
 
@@ -219,7 +219,9 @@ class StringUtils extends AbstractUtils
     }
 
     /**
-     * 去除字符串【左侧】的空格
+     * 去除字符串【前后】的空格
+     * @param string $string 待处理的字符串
+     * @return string 去除前后空格后的字符串
      */
     public static function trimLeft(string $string): string
     {
@@ -228,6 +230,8 @@ class StringUtils extends AbstractUtils
 
     /**
      * 去除字符串【右侧】的空格
+     * @param string $string 待处理的字符串
+     * @return string 去除右侧空格后的字符串
      */
     public static function trimRight(string $string): string
     {
@@ -236,6 +240,8 @@ class StringUtils extends AbstractUtils
 
     /**
      * 去除字符串中【所有】的空格
+     * @param string $string 待处理的字符串
+     * @return string 去除所有空格后的字符串
      */
     public static function trimAll(string $string): string
     {
